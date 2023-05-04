@@ -1,3 +1,5 @@
+import 'package:bunkapp/pags/katas_screen.dart';
+import 'package:bunkapp/pags/tecniques_screen.dart';
 import 'package:flutter/material.dart';
 
 class SpecialButtonBar extends StatelessWidget{
@@ -22,7 +24,12 @@ class SpecialButtonBar extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              onPressed: () {}, 
+              onPressed: () {
+                Navigator.push(
+                    context, 
+                     MaterialPageRoute(builder: (context) => KataScreen())
+                    );
+              }, 
               icon: const Icon(
                 Icons.sports_kabaddi,
                 size: 36,
@@ -35,7 +42,12 @@ class SpecialButtonBar extends StatelessWidget{
                 ),
               ),
               IconButton(
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(
+                    context, 
+                     MaterialPageRoute(builder: (context) => techniquesScreen())
+                    );
+                },
                 icon: const Icon(
                   Icons.sports_martial_arts_rounded,
                   size: 36,
