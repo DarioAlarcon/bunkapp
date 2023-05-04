@@ -72,7 +72,7 @@ class _kataScreen extends State<KataScreen>{
                     );
                         }, 
                         icon: const Icon(Icons.arrow_forward_ios),
-                        color: const Color.fromARGB(255, 193, 149, 251),
+                        color: Colors.blue,
                       )
                     ],
                   ),
