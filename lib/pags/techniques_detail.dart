@@ -1,6 +1,6 @@
 import 'package:bunkapp/models/techniques.dart';
 import 'package:flutter/material.dart';
-
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../widgets/button_special.dart';
 
 class TechniquesDetails extends StatefulWidget{
@@ -14,6 +14,21 @@ class TechniquesDetails extends StatefulWidget{
 }
 
 class _techniquesDetails extends State<TechniquesDetails>{
+  
+  
+late YoutubePlayerController _controller;
+
+  @override
+  void initState() {
+    final videoID = YoutubePlayer.convertUrlToId(widget.techniques.video);
+    _controller = YoutubePlayerController(initialVideoId: videoID!,
+    flags: const YoutubePlayerFlags(
+      autoPlay: false
+    ));
+    super.initState();
+  }
+  
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -56,7 +71,12 @@ class _techniquesDetails extends State<TechniquesDetails>{
                   width: 350,
                   height: 200,
                   margin: const EdgeInsets.only(bottom: 30),
-                ),
+                  child: YoutubePlayer(
+                    controller: _controller,
+                    showVideoProgressIndicator: true,
+                    onReady: () => debugPrint('ready'),
+                  ),
+                  ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   
@@ -88,7 +108,7 @@ class _techniquesDetails extends State<TechniquesDetails>{
           )
         ],
       ),
-    );
+      );
   }
 
 }
