@@ -1,6 +1,7 @@
 import 'package:bunkapp/models/belts.dart';
 import 'package:bunkapp/models/data.dart';
 import 'package:bunkapp/pags/belt_details.dart';
+import 'package:bunkapp/widgets/animated_navigation_bar.dart';
 import 'package:bunkapp/widgets/appbar_special.dart';
 import 'package:bunkapp/widgets/buttonBar_special.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: AnimatedAppBar(),
         body: Column(
           children: [
             const SpecialAppBar(),
@@ -88,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen>{
             ),
             Expanded(
               child: PageView.builder(
+                scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
                 controller: _pageControler,
                 itemCount: listShoes.length,
@@ -170,29 +173,6 @@ class _HomeScreenState extends State<HomeScreen>{
                                     ),
                                   )
                                 ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Material(
-                                    color: belts.listImage[0].color,
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(16),
-                                      bottomRight: Radius.circular(16)
-                                    ),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: InkWell(
-                                      onTap: () {},
-                                      child: const SizedBox(
-                                        height: 100,
-                                        width: 100,
-                                        child: Icon(
-                                          Icons.arrow_upward,
-                                          size: 40,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                  )
                               ],
                             ),
                                         );
@@ -204,11 +184,11 @@ class _HomeScreenState extends State<HomeScreen>{
               }
             )
           ),
-          Container(
-            height: 120,
+          /*Container(
+            height: 100,
             padding: const EdgeInsets.all(20),
             child: SpecialButtonBar(color: getColor()),
-          )
+          )*/
         ],
       ),
     );

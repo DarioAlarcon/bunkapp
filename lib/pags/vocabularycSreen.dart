@@ -20,24 +20,22 @@ class _vocabularyScreen extends State<vocabularyScreen>{
                 top: kToolbarHeight,
                 left: 16,
                 right: 16,
-                child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Specialbutton(
-                    ontap: () => Navigator.pop(context),
-                    child: const Icon(
-                      Icons.arrow_back_ios_sharp,
-                      color: Colors.black,
-                    ),
-                    ),
-                    const Text(
-                      'Vocabulario',
-                      style: TextStyle(
-                        fontSize: 34
+                child: Column(
+                  children: [
+                    Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                        const Text(
+                          'Vocabulario',
+                          style: TextStyle(
+                            fontSize: 34
+                          ),
+                        )
+                        ],
                       ),
-                    )
-                    ],
-                  ),
+                      
+                  ],
+                ),
           ),
           Positioned(
             top: size.height * 0.22,
@@ -45,6 +43,7 @@ class _vocabularyScreen extends State<vocabularyScreen>{
             left: size.height * 0.03,
             bottom: 10,
             child: ListView(
+              physics: BouncingScrollPhysics(),
               children: [Column(
                 children: List.generate(
                 listWords.length, 

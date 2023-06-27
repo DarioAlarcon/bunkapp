@@ -21,7 +21,8 @@ late YoutubePlayerController _controller;
     final videoID = YoutubePlayer.convertUrlToId(widget.kata.video);
     _controller = YoutubePlayerController(initialVideoId: videoID!,
     flags: const YoutubePlayerFlags(
-      autoPlay: false
+      autoPlay: true,
+      mute: false
     ));
     super.initState();
   }
@@ -71,7 +72,7 @@ late YoutubePlayerController _controller;
                   child: YoutubePlayer(
                     controller: _controller,
                     showVideoProgressIndicator: true,
-                    onReady: () => debugPrint('ready'),
+                    onReady: () => print('ready'),
                   ),
                 ),
                 Row(

@@ -1,4 +1,5 @@
 import 'package:bunkapp/pags/techniques_detail.dart';
+import 'package:bunkapp/widgets/animated_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:bunkapp/models/technique_list.dart';
 import '../widgets/button_special.dart';
@@ -17,73 +18,92 @@ class _techniquesScreen extends State<techniquesScreen>{
     return Scaffold(
       body: Stack(
         children: [
-            Positioned(
-                top: kToolbarHeight,
-                left: 16,
-                right: 16,
-                child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Specialbutton(
-                    ontap: () => Navigator.pop(context),
-                    child: const Icon(
-                      Icons.arrow_back_ios_sharp,
-                      color: Colors.black,
-                    ),
-                    ),
-                    const Text(
-                      'Tecnicas',
-                      style: TextStyle(
-                        fontSize: 34
-                      ),
-                    )
-                    ],
-                  ),
-          ),
+          headerTechnique(),
           Positioned(
-            top: size.height * 0.22,
+            top: size.height * 0.15,
             right: size.height * 0.03,
             left: size.height * 0.03,
             bottom: 10,
             child: ListView(
+              physics: BouncingScrollPhysics(),
               children: [Column(
                 children: List.generate(
                 techniqueList.length, 
-                (index) => Container(
-                  margin: const EdgeInsets.only(top: 16),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        techniqueList[index].nombre, 
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0
-                          ),
-                          ),
-                      const SizedBox(width: 30,),
-                      IconButton(
-                        onPressed: (){
-                          Navigator.push(
-                    context, 
-                     MaterialPageRoute(builder: (context) => TechniquesDetails(techniques: techniqueList[index],))
-                    );
-                        }, 
-                        icon: const Icon(Icons.arrow_forward_ios),
-                        color: Colors.red,
-                      )
-                    ],
-                  ),
+                (index) => Column(
+                  children: [
+                    
+                    Padding(
+                      padding: const EdgeInsets.only(right: 22),
+                      child: Divider(
+                        color: Colors.white24,
+                        height: 4,
+                      ),
+                    ),
+                    listTileTecnique( index: index,),
+                  ],
                 ),
                 
                 ),
+                
               ),
-        ])
+              SizedBox(height: 70,)
+        ]
+        )
             )
         ],
       ),
     );
   }
 
+}
+
+
+class headerTechnique extends StatelessWidget {
+  const headerTechnique({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+        top: 21,
+        left: 16,
+        right: 16,
+        child: Row(
+          children: [
+            
+            const Text(
+              'Tecnicas',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 34
+              ),
+            ),
+          ],
+        ),
+          );
+  }
+}
+
+
+class listTileTecnique extends StatelessWidget {
+  const listTileTecnique({
+    super.key, required this.index,
+  });
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context, 
+           MaterialPageRoute(builder: (context) => TechniquesDetails(techniques: techniqueList[index],))
+          );
+      },
+      child: ListTile(
+        title: Text(techniqueList[index].nombre, style: TextStyle(fontSize: 20),),
+        trailing: Icon(Icons.arrow_forward_ios, color: Colors.deepPurpleAccent,),
+      ),
+    );
+  }
 }

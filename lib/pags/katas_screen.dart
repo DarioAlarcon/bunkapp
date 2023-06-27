@@ -1,4 +1,5 @@
 import 'package:bunkapp/pags/kata_details.dart';
+import 'package:bunkapp/widgets/animated_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../models/kataList.dart';
@@ -16,75 +17,90 @@ class _kataScreen extends State<KataScreen>{
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
-        children: [
+      body: SafeArea(
+        child: Stack(
+          children: [
+            headerKata(),
             Positioned(
-                top: kToolbarHeight,
-                left: 16,
-                right: 16,
-                child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Specialbutton(
-                    ontap: () => Navigator.pop(context),
-                    child: const Icon(
-                      Icons.arrow_back_ios_sharp,
-                      color: Colors.black,
-                    ),
-                    ),
-                    const Text(
-                      'Katas',
-                      style: TextStyle(
-                        fontSize: 34
-                      ),
-                    )
-                    ],
-                  ),
-          ),
-          Positioned(
-            top: size.height * 0.22,
-            right: size.height * 0.03,
-            left: size.height * 0.03,
-            bottom: 10,
-            child: ListView(
-              children: [Column(
-                children: List.generate(
-                kataList.length, 
-                (index) => Container(
-                  margin: const EdgeInsets.only(top: 16),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              top: size.height * 0.15,
+              right: size.height * 0.03,
+              left: size.height * 0.03,
+              bottom: 1,
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                children: [Column(
+                  children: List.generate(
+                  kataList.length, 
+                  (index) => Column(
                     children: [
-                      Text(
-                        kataList[index].name, 
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0
-                          ),
-                          ),
-                      const SizedBox(width: 30,),
-                      IconButton(
-                        onPressed: (){
-                          Navigator.push(
-                    context, 
-                     MaterialPageRoute(builder: (context) => KataDetails(kata: kataList[index]))
-                    );
-                        }, 
-                        icon: const Icon(Icons.arrow_forward_ios),
-                        color: Colors.blue,
-                      )
+                       Padding(
+                        padding: const EdgeInsets.only(right: 22),
+                        child: Divider(
+                          color: Colors.white24,
+                          height: 4,
+                        ),
+                      ),
+                      listTileKata(index: index),
                     ],
                   ),
+                  
                 ),
-                
                 ),
-              ),
-        ])
-            )
-        ],
+                ]
+                )
+                )
+          ],
+        ),
       ),
     );
   }
 
+}
+
+class headerKata extends StatelessWidget {
+  const headerKata({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+        top: 21,
+        left: 16,
+        right: 16,
+        child: Row(
+          children: [
+            const Text(
+              'Katas',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 34
+              ),
+            ),
+          ],
+        ),
+          );
+  }
+}
+
+class listTileKata extends StatelessWidget {
+  const listTileKata({
+    super.key, required this.index,
+  });
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context, 
+           MaterialPageRoute(builder: (context) => KataDetails(kata: kataList[index],))
+          );
+      },
+      child: ListTile(
+        title: Text(kataList[index].name, style: TextStyle(fontSize: 20),),
+        trailing: Icon(Icons.arrow_forward_ios, color: Colors.deepPurpleAccent,),
+      ),
+    );
+  }
 }

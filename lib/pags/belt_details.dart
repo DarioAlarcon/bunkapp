@@ -105,14 +105,8 @@ int valueIndexColor = 0;
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  widget.belts.category,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
+                                
+                                const SizedBox(height: 28),
                                 Text(
                                   widget.belts.name,
                                   style: const TextStyle(
