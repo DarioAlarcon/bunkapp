@@ -12,6 +12,7 @@ class KataDetails extends StatefulWidget {
   }
   
 }
+// ignore: camel_case_types
 class _kataDetails extends State<KataDetails>{
   
 late YoutubePlayerController _controller;
@@ -98,7 +99,7 @@ late YoutubePlayerController _controller;
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.all(30),
+                  margin: const EdgeInsets.all(30),
                   width: 330,
                   height: 200,
                   child: Text(

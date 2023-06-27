@@ -1,17 +1,17 @@
-import 'package:bunkapp/pags/kata_details.dart';
-import 'package:bunkapp/widgets/animated_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:bunkapp/pags/kata_details.dart';
 import '../models/kataList.dart';
-import '../widgets/button_special.dart';
 
 class KataScreen extends StatefulWidget{
+  const KataScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _kataScreen();
   }
 }
 
+// ignore: camel_case_types
 class _kataScreen extends State<KataScreen>{
   @override
   Widget build(BuildContext context) {
@@ -20,35 +20,8 @@ class _kataScreen extends State<KataScreen>{
       body: SafeArea(
         child: Stack(
           children: [
-            headerKata(),
-            Positioned(
-              top: size.height * 0.15,
-              right: size.height * 0.03,
-              left: size.height * 0.03,
-              bottom: 1,
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                children: [Column(
-                  children: List.generate(
-                  kataList.length, 
-                  (index) => Column(
-                    children: [
-                       Padding(
-                        padding: const EdgeInsets.only(right: 22),
-                        child: Divider(
-                          color: Colors.white24,
-                          height: 4,
-                        ),
-                      ),
-                      listTileKata(index: index),
-                    ],
-                  ),
-                  
-                ),
-                ),
-                ]
-                )
-                )
+            const headerKata(),
+            bodyKataScreen(size: size)
           ],
         ),
       ),
@@ -57,6 +30,49 @@ class _kataScreen extends State<KataScreen>{
 
 }
 
+// ignore: camel_case_types
+class bodyKataScreen extends StatelessWidget {
+  const bodyKataScreen({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: size.height * 0.15,
+      right: size.height * 0.03,
+      left: size.height * 0.03,
+      bottom: 1,
+      child: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [Column(
+          children: List.generate(
+          kataList.length, 
+          (index) => Column(
+            children: [
+               const Padding(
+                padding: EdgeInsets.only(right: 22),
+                child: Divider(
+                  color: Colors.white24,
+                  height: 4,
+                ),
+              ),
+              listTileKata(index: index),
+            ],
+          ),
+          
+        ),
+        ),
+        ]
+        )
+        );
+  }
+}
+
+// ignore: camel_case_types
 class headerKata extends StatelessWidget {
   const headerKata({
     super.key,
@@ -64,13 +80,13 @@ class headerKata extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    return const Positioned(
         top: 21,
         left: 16,
         right: 16,
         child: Row(
           children: [
-            const Text(
+            Text(
               'Katas',
               style: TextStyle(
                 color: Colors.white,
@@ -83,6 +99,7 @@ class headerKata extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class listTileKata extends StatelessWidget {
   const listTileKata({
     super.key, required this.index,
@@ -98,8 +115,8 @@ class listTileKata extends StatelessWidget {
           );
       },
       child: ListTile(
-        title: Text(kataList[index].name, style: TextStyle(fontSize: 20),),
-        trailing: Icon(Icons.arrow_forward_ios, color: Colors.deepPurpleAccent,),
+        title: Text(kataList[index].name, style: const TextStyle(fontSize: 20),),
+        trailing: const Icon(Icons.arrow_forward_ios, color: Colors.deepPurpleAccent,),
       ),
     );
   }

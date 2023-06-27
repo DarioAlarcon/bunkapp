@@ -1,9 +1,5 @@
-import 'package:bunkapp/models/belts.dart';
 import 'package:bunkapp/models/data.dart';
 import 'package:bunkapp/pags/belt_details.dart';
-import 'package:bunkapp/widgets/animated_navigation_bar.dart';
-import 'package:bunkapp/widgets/appbar_special.dart';
-import 'package:bunkapp/widgets/buttonBar_special.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -63,34 +59,29 @@ class _HomeScreenState extends State<HomeScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: AnimatedAppBar(),
         body: Column(
           children: [
-            const SpecialAppBar(),
-            SizedBox(
-              height: 50,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 30,left: 10),
+              child: SizedBox(
+                height: 50,
                 child: Row(
-                  children: List.generate(
-                    listCategory.length,
-                    (index) => Padding(
-                      padding: const EdgeInsets.only(right: 12.0),
-                      child: Text(
-                        listCategory[index],
-                        style:  TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                          color: index == indexPage ? getColor() : Colors.white,
-                        ),
-                      ),)
-                    )
-                  ),
+                  children: [
+                    Text(
+                              'Home',
+                              style:  TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 30,
+                                color:  getColor() ,
+                              ),
+                            ),
+                  ],
+                ),
               ),
             ),
             Expanded(
               child: PageView.builder(
-                scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.vertical,
                 physics: const BouncingScrollPhysics(),
                 controller: _pageControler,
                 itemCount: listShoes.length,
@@ -105,41 +96,34 @@ class _HomeScreenState extends State<HomeScreen>{
                       );
                     },
                     child: Padding(
-                      padding:  EdgeInsets.only(right: index == indexPage ? 30 : 60),
+                      padding:  EdgeInsets.only(right: index == indexPage ? 40 : 70, left: index == indexPage ? 40 : 50),
                       child: Transform.translate(
-                        offset: Offset(index == indexPage ? 0 : 20, 0),
+                        offset: Offset(index == indexPage ? 0 : 5, 0),
                         child: LayoutBuilder(
                           builder: (context, constraints) {
                             return AnimatedContainer(
-                              duration: const Duration(milliseconds: 250),
+                              duration: const Duration(milliseconds: 350),
                               margin: EdgeInsets.only(
-                                top: index == indexPage ? 30 : 50,
+                                top: index == indexPage ? 10 : 50,
                                 bottom: 30,
                                 ),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(24),
                                 color: Colors.white,
                               ),
                             child: Stack(
                               clipBehavior: Clip.none,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40),
+                                  padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: 
                                     [
-                                      Text(
-                                        belts.category,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600
-                                        ),
-                                      ),
+
                                       const SizedBox(height: 8,),
                                       Text(
-                                        belts.name,
+                                        belts.category,
                                         style: const TextStyle(
                                           fontSize: 28,
                                           color: Colors.black,
@@ -152,18 +136,31 @@ class _HomeScreenState extends State<HomeScreen>{
                                         style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.black,
+                                          color: Colors.red,
                                         ),
                                       ),
                                       
                                     ],
                                     ),
                                 ),
+                                 Positioned(
+                                  bottom: -10,
+                                  right: -10,
+                                  child: 
+                                  Container(
+                                    width: 100, height: 100,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: belts.listImage[0].color,
+                                    ),
+                                    child: const Icon(Icons.arrow_upward_sharp, size: 40,),
+                                  )
+                                  ),
                                 Positioned(
-                                  top: constraints.maxHeight*0.2,
-                                  left: constraints.maxWidth*0.05,
-                                  right: -constraints.maxWidth*0.16,
-                                  bottom: constraints.maxHeight*0.2,
+                                  top: constraints.maxHeight*0.15,
+                                  left: constraints.maxWidth*0.04,
+                                  right: -constraints.maxWidth*0,
+                                  bottom: -constraints.maxHeight*0.1,
                                   child: Hero(
                                     tag: belts.name,
                                     child: Image(
@@ -173,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen>{
                                     ),
                                   )
                                 ),
+                               
                               ],
                             ),
                                         );

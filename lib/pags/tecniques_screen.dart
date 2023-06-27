@@ -1,16 +1,18 @@
 import 'package:bunkapp/pags/techniques_detail.dart';
-import 'package:bunkapp/widgets/animated_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:bunkapp/models/technique_list.dart';
-import '../widgets/button_special.dart';
 
+// ignore: camel_case_types
 class techniquesScreen extends StatefulWidget{
+  const techniquesScreen({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _techniquesScreen();
   }
 }
 
+// ignore: camel_case_types
 class _techniquesScreen extends State<techniquesScreen>{
   @override
   Widget build(BuildContext context) {
@@ -18,38 +20,8 @@ class _techniquesScreen extends State<techniquesScreen>{
     return Scaffold(
       body: Stack(
         children: [
-          headerTechnique(),
-          Positioned(
-            top: size.height * 0.15,
-            right: size.height * 0.03,
-            left: size.height * 0.03,
-            bottom: 10,
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              children: [Column(
-                children: List.generate(
-                techniqueList.length, 
-                (index) => Column(
-                  children: [
-                    
-                    Padding(
-                      padding: const EdgeInsets.only(right: 22),
-                      child: Divider(
-                        color: Colors.white24,
-                        height: 4,
-                      ),
-                    ),
-                    listTileTecnique( index: index,),
-                  ],
-                ),
-                
-                ),
-                
-              ),
-              SizedBox(height: 70,)
-        ]
-        )
-            )
+          const headerTechnique(),
+          bodyTechniqueScreen(size: size)
         ],
       ),
     );
@@ -57,7 +29,52 @@ class _techniquesScreen extends State<techniquesScreen>{
 
 }
 
+// ignore: camel_case_types
+class bodyTechniqueScreen extends StatelessWidget {
+  const bodyTechniqueScreen({
+    super.key,
+    required this.size,
+  });
 
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: size.height * 0.15,
+      right: size.height * 0.03,
+      left: size.height * 0.03,
+      bottom: 1,
+      child: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [Column(
+          children: List.generate(
+          techniqueList.length, 
+          (index) => Column(
+            children: [
+              
+              const Padding(
+                padding: EdgeInsets.only(right: 22),
+                child: Divider(
+                  color: Colors.white24,
+                  height: 4,
+                ),
+              ),
+              listTileTecnique( index: index,),
+            ],
+          ),
+          
+          ),
+          
+        ),
+        ]
+        )
+      );
+  }
+}
+
+
+// ignore: camel_case_types
 class headerTechnique extends StatelessWidget {
   const headerTechnique({
     super.key,
@@ -65,14 +82,14 @@ class headerTechnique extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    return const Positioned(
         top: 21,
         left: 16,
         right: 16,
         child: Row(
           children: [
             
-            const Text(
+            Text(
               'Tecnicas',
               style: TextStyle(
                 color: Colors.white,
@@ -86,6 +103,7 @@ class headerTechnique extends StatelessWidget {
 }
 
 
+// ignore: camel_case_types
 class listTileTecnique extends StatelessWidget {
   const listTileTecnique({
     super.key, required this.index,
@@ -101,8 +119,8 @@ class listTileTecnique extends StatelessWidget {
           );
       },
       child: ListTile(
-        title: Text(techniqueList[index].nombre, style: TextStyle(fontSize: 20),),
-        trailing: Icon(Icons.arrow_forward_ios, color: Colors.deepPurpleAccent,),
+        title: Text(techniqueList[index].nombre, style: const TextStyle(fontSize: 20),),
+        trailing: const Icon(Icons.arrow_forward_ios, color: Colors.deepPurpleAccent,),
       ),
     );
   }

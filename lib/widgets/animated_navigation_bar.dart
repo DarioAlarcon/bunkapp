@@ -7,9 +7,11 @@ import 'package:rive/rive.dart';
 import '../../utils/rive_utils.dart';
 import '../models/layout_model.dart';
 import '../pags/vocabularycSreen.dart';
-import '../testing/testingScreen.dart';
+import '../pags/homeScreen.dart';
 
 class AnimatedAppBar extends StatefulWidget {
+  const AnimatedAppBar({super.key});
+
   
   @override
   State<AnimatedAppBar> createState() => _AnimatedAppBarState();
@@ -21,10 +23,10 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.all(12),
-        margin: EdgeInsets.symmetric(horizontal: 24,
+        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(horizontal: 24,
         vertical: 15),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color.fromARGB(210, 22, 22, 22),
           borderRadius: BorderRadius.all(Radius.circular(24))
         ),
@@ -41,7 +43,7 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                       selectedBottomNav = bottomNavs[index];
                     });
                   }
-                  Future.delayed(Duration(seconds: 1),(){
+                  Future.delayed(const Duration(seconds: 1),(){
                       bottomNavs[index].input!.change(false);
                   });
                   layoutMOdel.currentPage = bottomNavs[index].page;
@@ -50,11 +52,11 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      margin: EdgeInsets.only(bottom: 2),
+                      duration: const Duration(milliseconds: 200),
+                      margin: const EdgeInsets.only(bottom: 2),
                       height: 4,
                       width: bottomNavs[index]==selectedBottomNav?20:0,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.deepPurpleAccent,
                         borderRadius: BorderRadius.all(Radius.circular(12))
                       ), 
@@ -105,21 +107,21 @@ class RiveAssets{
 List bottomNavs = [
   RiveAssets(
     'assets/riveAssets/icons_animated.riv',
-    HomeScreen(),
+    const HomeScreen(),
     artboard: "HOME", 
     stateMachineName: "HOME_interactivity", 
     title: "home", 
   ),
   RiveAssets(
     'assets/riveAssets/icons_animated.riv', 
-    KataScreen(),
+    const KataScreen(),
     artboard: "SEARCH", 
     stateMachineName: "SEARCH_Interactivity", 
     title: "search", 
   ),
   RiveAssets(
     'assets/riveAssets/icons_animated.riv', 
-    techniquesScreen(),
+    const techniquesScreen(),
     artboard: "BELL", 
     stateMachineName: "BELL_Interactivity", 
     title: "home", 
@@ -127,7 +129,7 @@ List bottomNavs = [
   
   RiveAssets(
     'assets/riveAssets/icons_animated.riv', 
-    vocabularyScreen(),
+    const vocabularyScreen(),
     artboard: "USER", 
     stateMachineName: "USER_Interactivity", 
     title: "home", 

@@ -13,6 +13,7 @@ class TechniquesDetails extends StatefulWidget{
 
 }
 
+// ignore: camel_case_types
 class _techniquesDetails extends State<TechniquesDetails>{
   
   
@@ -86,14 +87,14 @@ late YoutubePlayerController _controller;
                       style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        color: Colors.amber,
+                        color: Colors.deepPurpleAccent,
                       ),
                     ),
               
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                  margin: const EdgeInsets.only(top: 20, left: 30, right: 30),
                   width: 330,
                   height: 220,
                   child: Text(

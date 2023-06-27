@@ -1,5 +1,4 @@
 import 'package:bunkapp/models/kata.dart';
-import 'package:flutter/material.dart';
 
 final kataList = [
 Kata(
