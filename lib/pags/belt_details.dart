@@ -59,8 +59,8 @@ int valueIndexColor = 0;
                                   },
                                   child: Container(
                                     margin: const EdgeInsets.only(right: 8),
-                                    height: 30,
-                                    width:  30,
+                                    height: MediaQuery.of(context).size.width<=350?20:30,
+                                    width:  MediaQuery.of(context).size.width<=350?20:30,
                                     decoration: BoxDecoration(
                                       color: widget.belts.listImage[index].color,
                                       shape: BoxShape.circle,

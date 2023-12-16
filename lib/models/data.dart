@@ -50,14 +50,14 @@ final listShoes = [
       "los estudiantes han desarrollado un nivel básico de habilidades en kata y kumite, además de tener una comprensión sólida de los fundamentos del karate."
       ),
       ImageBelts(
-      "assets/img/green_belt01.png", 
-      const Color.fromARGB(255, 143, 255, 181),
-      "se debee haber perfeccionado sus habilidades en kata y kumite, además de tener una comprensión más profunda de los conceptos técnicos y teóricos del karate"
-      ),
-      ImageBelts(
       "assets/img/blue_belt01.png",
       const Color.fromARGB(255, 32, 170, 216),
       "se debe tener un alto nivel de habilidad técnica y teórica en el karate, y ser capaces de ejecutar kata y kumite con precisión y fluidez."
+      ),
+      ImageBelts(
+      "assets/img/green_belt01.png", 
+      const Color.fromARGB(255, 143, 255, 181),
+      "se debee haber perfeccionado sus habilidades en kata y kumite, además de tener una comprensión más profunda de los conceptos técnicos y teóricos del karate"
       ),
       ImageBelts(
       "assets/img/purple_belt01.png",

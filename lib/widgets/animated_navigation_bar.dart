@@ -36,15 +36,10 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
             ...List.generate(bottomNavs.length, 
             (index) => GestureDetector(
                 onTap: () {
+                  print(bottomNavs[index].input);
                   final layoutMOdel = Provider.of<LayoutModel>(context, listen: false);
-                  bottomNavs[index].input!.change(true);
-                  if (bottomNavs[index]!=selectedBottomNav) {
-                    setState(() {
-                      selectedBottomNav = bottomNavs[index];
-                    });
-                  }
-                  Future.delayed(const Duration(seconds: 1),(){
-                      bottomNavs[index].input!.change(false);
+                  setState((){
+                    selectedBottomNav = bottomNavs[index];
                   });
                   layoutMOdel.currentPage = bottomNavs[index].page;
                 },
@@ -52,7 +47,7 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
+                      duration: const Duration(milliseconds: 500),
                       margin: const EdgeInsets.only(bottom: 2),
                       height: 4,
                       width: bottomNavs[index]==selectedBottomNav?20:0,
@@ -66,17 +61,11 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                       width: 43,
                       child: Opacity(
                         opacity: bottomNavs[index]==selectedBottomNav?1:0.5,
-                        child: RiveAnimation.asset(
-                          bottomNavs.first.src,
-                          artboard: bottomNavs[index].artboard,
-                          onInit: (artboard) {
-                            StateMachineController controller =
-                             RiveUtils.getRivecontroller(artboard,
-                            stateMachineName: bottomNavs[index].stateMachineName,
-                            );
-                            bottomNavs[index].input = controller.findSMI("active") as SMIBool;
-                          },
-                          ),
+                        child: Icon(
+                          bottomNavs[index].icondata,
+                          color: Colors.white,
+                          size: 32,
+                        )
                       ),
                     ),
                   ],
@@ -92,12 +81,10 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
 
 class RiveAssets{
   final Widget page;
-  final String artboard, stateMachineName, title, src;
+  final IconData icondata;
   late SMIBool? input;
-  RiveAssets(this.src, this.page, {
-    required this.artboard,
-    required this.stateMachineName,
-    required this.title,
+  RiveAssets( this.page, {
+    required this.icondata,
     this.input
   });
   set setInput(SMIBool status){
@@ -106,32 +93,22 @@ class RiveAssets{
 }
 List bottomNavs = [
   RiveAssets(
-    'assets/riveAssets/icons_animated.riv',
     const HomeScreen(),
-    artboard: "HOME", 
-    stateMachineName: "HOME_interactivity", 
-    title: "home", 
+    icondata: Icons.home_filled,
   ),
   RiveAssets(
-    'assets/riveAssets/icons_animated.riv', 
-    const KataScreen(),
-    artboard: "SEARCH", 
-    stateMachineName: "SEARCH_Interactivity", 
-    title: "search", 
+    const KataScreen(), 
+    icondata: Icons.sports_kabaddi_rounded,
+     
   ),
   RiveAssets(
-    'assets/riveAssets/icons_animated.riv', 
-    const techniquesScreen(),
-    artboard: "BELL", 
-    stateMachineName: "BELL_Interactivity", 
-    title: "home", 
+    const techniquesScreen(), 
+    icondata: Icons.sports_martial_arts_rounded,
+     
   ),
   
   RiveAssets(
-    'assets/riveAssets/icons_animated.riv', 
     const vocabularyScreen(),
-    artboard: "USER", 
-    stateMachineName: "USER_Interactivity", 
-    title: "home", 
+    icondata: Icons.menu_book
   ),
 ];

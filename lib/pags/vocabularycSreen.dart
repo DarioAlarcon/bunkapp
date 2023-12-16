@@ -50,14 +50,14 @@ class wordList extends StatelessWidget {
           children: List.generate(
           listWords.length, 
           (index) => Container(
-            margin: const EdgeInsets.only(top: 16),
+            margin:  EdgeInsets.only(top: 16),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(listWords[index].word, style: const TextStyle(fontWeight: FontWeight.bold),),
+                Text(listWords[index].word, style: TextStyle(fontWeight: FontWeight.bold, fontSize: MediaQuery.of(context).size.width<=350?10:13),),
                 const SizedBox(width: 30,),
-                SizedBox(width: 200, child: Text(listWords[index].translation))
+                SizedBox(width:MediaQuery.of(context).size.width<=350? 150:200, child: Text(listWords[index].translation, style: TextStyle( fontSize: MediaQuery.of(context).size.width<=350?10:13),))
               ],
             ),
           ),
